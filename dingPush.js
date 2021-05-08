@@ -14,21 +14,23 @@ const resp = (tk) => {
 }
 
 // 自定义回复
-const send = (data) => {
+const send = (data, cb) => {
     // console.log(data,u);
     const req = https.request(u, {
         'method': 'POST',
         'headers': {
             'Content-Type': 'application/json'
         }
-    },(res)=>{
+    }, (res) => {
         // console.log(res);
+        // 执行回掉清空内存
+        cb(res);
     });
     req.write(JSON.stringify(data));
     req.end();
 }
 
 module.exports = {
-    resp:resp,
-    send:send
+    resp: resp,
+    send: send
 }
